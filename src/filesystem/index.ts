@@ -12,7 +12,8 @@ import path from "path";
 import os from 'os';
 import { z } from "zod";
 import { zodToJsonSchema } from "zod-to-json-schema";
-import { diffLines, createTwoFilesPatch } from 'diff';
+import { createTwoFilesPatch } from 'diff';
+import * as mimeTypes from 'mime-types';
 import { minimatch } from 'minimatch';
 
 // Command line argument parsing
@@ -163,7 +164,9 @@ const server = new Server(
   },
   {
     capabilities: {
+      resources: {},
       tools: {},
+      prompts: {}
     },
   },
 );
