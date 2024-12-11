@@ -370,5 +370,6 @@ async def main(db_path: str):
                     notification_options=NotificationOptions(),
                     experimental_capabilities={},
                 ),
+                raise_exceptions=False,
             ),
         )

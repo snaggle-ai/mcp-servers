@@ -6,6 +6,11 @@ import {
   CallToolRequestSchema,
   ListToolsRequestSchema,
   ToolSchema,
+  ListResourcesRequestSchema,
+  ReadResourceRequestSchema,
+  ListResourceTemplatesRequestSchema,
+  GetPromptRequestSchema,
+  ListPromptsRequestSchema,
 } from "@modelcontextprotocol/sdk/types.js";
 import fs from "fs/promises";
 import path from "path";
