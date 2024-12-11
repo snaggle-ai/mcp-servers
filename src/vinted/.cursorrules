@@ -1,0 +1,7 @@
+We are developing an MCP server for the Vinted API.
+Check src/vinted/README.md to get a basic idea of the project.
+Check src/vinted/TODO.md for the checklist of tasks to complete and update it as you work on the tasks.
+
+Ensure that all runtime code will run on Windows, Mac and Linux by using cross-platform methods and tools where possible and handling different OS-specific behaviors where necessary.
+
+Where possible follow a Test-Driven Development approach - first write a unit test that fails, then write the code to make the test pass.

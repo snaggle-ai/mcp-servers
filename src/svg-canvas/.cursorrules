@@ -1,0 +1,9 @@
+We are developing an MCP server for the SVG Canvas API.
+Check src/svg-canvas/README.md to get a basic idea of the project.
+Check src/svg-canvas/TODO.md for the checklist of tasks to complete and update it as you work on the tasks.
+
+Ensure that all runtime code will run on Windows, Mac and Linux by using cross-platform methods and tools where possible and handling different OS-specific behaviors where necessary.
+
+Where possible follow a Test-Driven Development approach - first write a unit test that fails, then write the code to make the test pass.
+
+index.ts is the entry point of the server and must be located in the root of the package. All other files should be in the src/ directory.

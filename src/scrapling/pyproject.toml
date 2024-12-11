@@ -1,0 +1,24 @@
+[project]
+name = "mcp-server-scrapling"
+version = "0.1.0"
+description = "MCP server for web scraping using Playwright"
+dependencies = [
+    "mcp",
+    "scrapling",
+    "playwright",
+    "random-open-port",
+]
+
+[project.optional-dependencies]
+test = [
+    "pytest",
+    "pytest-asyncio",
+]
+
+[project.scripts]
+mcp-server-scrapling = "mcp_server_scrapling:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+ 
