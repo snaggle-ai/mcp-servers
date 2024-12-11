@@ -4,7 +4,11 @@ import { Server } from "@modelcontextprotocol/sdk/server/index.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import {
   CallToolRequestSchema,
+  GetPromptRequestSchema,
+  ListPromptsRequestSchema,
+  ListResourceTemplatesRequestSchema,
   ListToolsRequestSchema,
+  ReadResourceRequestSchema,
   ToolSchema,
 } from "@modelcontextprotocol/sdk/types.js";
 import fs from "fs/promises";
@@ -711,90 +715,6 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
     };
   }
 });
-
-// server.setRequestHandler(ListResourcesRequestSchema, async (request) => {
-//   try {
-//     const pageSize = 100;
-//     let results: Array<{uri: string, name: string, mimeType?: string}> = [];
-    
-//     // Handle cursor-based pagination if provided
-//     const cursor = request.params?.cursor;
-//     let startPath: string;
-    
-//     if (cursor) {
-//       startPath = await validatePath(cursor);
-//     } else {
-//       // If no cursor, check if we're listing a specific folder
-//       const uri = request.params?.uri as string | undefined;
-//       const folderMatch = uri?.match(/^folder:\/\/(.+)/);
-//       if (folderMatch) {
-//         startPath = await validatePath(folderMatch[1]);
-//       } else {
-//         startPath = allowedDirectories[0];
-//       }
-//     }
-
-//     // Read directory contents
-//     const entries = await fs.readdir(startPath, { withFileTypes: true });
-    
-//     for (const entry of entries) {
-//       const fullPath = path.join(startPath, entry.name);
-//       try {
-//         await validatePath(fullPath);
-        
-//         let mimeType: string | undefined;
-//         if (entry.isFile()) {
-//           // MIME type detection logic remains the same
-//           if (entry.name.endsWith('.json')) mimeType = 'application/json';
-//           else if (entry.name.endsWith('.txt')) mimeType = 'text/plain';
-//           else if (entry.name.endsWith('.md')) mimeType = 'text/markdown';
-//           else if (entry.name.match(/\.(jpg|jpeg)$/i)) mimeType = 'image/jpeg';
-//           else if (entry.name.endsWith('.png')) mimeType = 'image/png';
-//         }
-
-//         // Get path relative to workspace root
-//         const relativePath = path.relative(process.cwd(), fullPath);
-//         // Convert backslashes to forward slashes for URI compatibility
-//         const uriPath = relativePath.split(path.sep).join('/');
-        
-//         // Use appropriate URI scheme based on type
-//         const uri = entry.isDirectory() 
-//           ? `folder://${uriPath}`
-//           : `file://${uriPath}`;
-
-//         results.push({
-//           uri,
-//           name: entry.name,
-//           mimeType: entry.isDirectory() ? 'inode/directory' : mimeType,
-//         });
-//       } catch {
-//         // Skip invalid paths
-//         continue;
-//       }
-//     }
-
-//     // Sort results for consistency
-//     results.sort((a, b) => a.name.localeCompare(b.name));
-
-//     // Handle pagination
-//     let nextCursor: string | undefined;
-//     if (results.length > pageSize) {
-//       results = results.slice(0, pageSize);
-//       const lastEntry = results[results.length - 1];
-//       const lastPath = path.dirname(lastEntry.uri.replace(/^(file|folder):\/\//, ''));
-//       nextCursor = lastPath;
-//     }
-
-//     return {
-//       resources: results,
-//       nextCursor,
-//     };
-//   } catch (error) {
-//     const errorMessage = error instanceof Error ? error.message : String(error);
-//     throw new Error(`Failed to list resources: ${errorMessage}`);
-//   }
-// });
-
 
 // Add this handler after the other resource handlers
 server.setRequestHandler(ListResourceTemplatesRequestSchema, async () => {
